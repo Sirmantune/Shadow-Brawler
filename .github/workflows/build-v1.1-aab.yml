@@ -1,5 +1,18 @@
 name: Build Android App Bundle
+on:name: Copilot code review
 on:
+  pull_request:  # or whatever triggers your workflow
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  your_job_name:
+    runs-on: ubuntu-latest
+    steps:
+      # your steps here
+
   push:
     branches: [ main, develop ]
   pull_request:
