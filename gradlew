@@ -18,7 +18,7 @@
 
 set -e
 
-DIRNAME=$(cd "$(dirname "$0")" || exit 1; pwd)
+APP_PATH=$(cd "$(dirname "$0")" || exit 1; pwd)
 GRADLE_USER_HOME="${GRADLE_USER_HOME:-$HOME/.gradle}"
 DISTRIBUTION_URL="https://services.gradle.org/distributions/gradle-8.1.1-bin.zip"
 
@@ -35,5 +35,6 @@ if [ ! -d "$GRADLE_USER_HOME/wrapper/dists/gradle-8.1.1" ]; then
     echo "Gradle downloaded successfully"
 fi
 
-# Execute gradle
+# Change to project directory and execute gradle
+cd "$APP_PATH"
 exec "$GRADLE_USER_HOME/wrapper/dists/gradle-8.1.1/bin/gradle" "$@"
