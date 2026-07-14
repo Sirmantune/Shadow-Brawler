@@ -16,7 +16,9 @@
 # limitations under the License.
 #
 
-app_path=$(cd "$(dirname "$0")" && pwd -P) || exit 1
+set -e
 
-app_name="Gradle"
-exec "$app_path/gradle" "$@"
+DIRNAME=$(cd "$(dirname "$0")" || exit 1; pwd)
+CLASSPATH="$DIRNAME/gradle/wrapper/gradle-wrapper.jar"
+
+exec java -classpath "$CLASSPATH" org.gradle.wrapper.GradleWrapperMain "$@"
