@@ -1,0 +1,16 @@
+# Built application files
+*.apk
+*.ap_
+*.aab
+
+# Gradle files
+.gradle/
+build/
+
+# Local configuration file (this is where you hide your signing info!)
+key.properties
+
+# Other common hidden files
+.DS_Store
+.idea/
+*.iml

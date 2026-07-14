@@ -1,0 +1,8 @@
+[
+  {
+    "workflow": "build-v1.1-aab.yml",
+    "command": "act workflow_dispatch -W .github/workflows/build-v1.1-aab.yml",
+    "success": true,
+    "timestamp": "2026-07-11T10:36:56.165Z"
+  }
+]
