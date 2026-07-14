@@ -19,6 +19,21 @@
 set -e
 
 DIRNAME=$(cd "$(dirname "$0")" || exit 1; pwd)
-CLASSPATH="$DIRNAME/gradle/wrapper/gradle-wrapper.jar"
+GRADLE_USER_HOME="${GRADLE_USER_HOME:-$HOME/.gradle}"
+DISTRIBUTION_URL="https://services.gradle.org/distributions/gradle-8.1.1-bin.zip"
 
-exec java -classpath "$CLASSPATH" org.gradle.wrapper.GradleWrapperMain "$@"
+# Create gradle home
+mkdir -p "$GRADLE_USER_HOME/wrapper/dists"
+
+# Check if gradle is already installed
+if [ ! -d "$GRADLE_USER_HOME/wrapper/dists/gradle-8.1.1" ]; then
+    echo "Downloading Gradle 8.1.1..."
+    cd "$GRADLE_USER_HOME/wrapper/dists"
+    wget -q "$DISTRIBUTION_URL" -O gradle-8.1.1-bin.zip || curl -s "$DISTRIBUTION_URL" -o gradle-8.1.1-bin.zip
+    unzip -q gradle-8.1.1-bin.zip
+    rm gradle-8.1.1-bin.zip
+    echo "Gradle downloaded successfully"
+fi
+
+# Execute gradle
+exec "$GRADLE_USER_HOME/wrapper/dists/gradle-8.1.1/bin/gradle" "$@"
